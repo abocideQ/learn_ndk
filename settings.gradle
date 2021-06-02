@@ -1,0 +1,4 @@
+rootProject.name = "NDKer"
+include ':app'
+include ':ndk_lesson_1'
+include ':ndk_lesson_2'
