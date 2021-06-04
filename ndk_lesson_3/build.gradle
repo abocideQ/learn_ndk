@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    implementation "$kotlin_version"
+    implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"
     implementation "$material"

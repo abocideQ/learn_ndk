@@ -39,7 +39,6 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
     jint result = RegisterNatives(env);
-    LOGD("RegisterNatives result: %d", result);
     return JNI_VERSION_1_6;
 }
 }

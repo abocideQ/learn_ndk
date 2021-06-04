@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <android.opengl.GLSurfaceView
+        android:id="@+id/gsv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.opengl.GLSurfaceView>
 </RelativeLayout>

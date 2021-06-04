@@ -14,11 +14,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    ndkVersion "$ndk"
     externalNativeBuild { cmake { path "CMakeLists.txt" } }
 }
 
 dependencies {
-    implementation "$kotlin_version"
+    implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"
     implementation "$material"

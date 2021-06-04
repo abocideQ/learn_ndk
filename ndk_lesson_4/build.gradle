@@ -13,8 +13,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-//    defaultConfig { externalNativeBuild { cmake { cppFlags "-std=c++11 -frtti -fexceptions" } } }
-//    ndkVersion "$ndk"
+    ndkVersion "$ndk"
+    defaultConfig {
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -frtti -fexceptions"
+            }
+        }
+    }
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
@@ -24,7 +30,8 @@ android {
 }
 
 dependencies {
-    implementation "$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"
     implementation "$material"
