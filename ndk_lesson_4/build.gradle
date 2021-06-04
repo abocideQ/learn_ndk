@@ -6,7 +6,6 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -14,7 +13,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    externalNativeBuild { cmake { path "CMakeLists.txt" } }
+//    defaultConfig { externalNativeBuild { cmake { cppFlags "-std=c++11 -frtti -fexceptions" } } }
+//    ndkVersion "$ndk"
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
 }
 
 dependencies {

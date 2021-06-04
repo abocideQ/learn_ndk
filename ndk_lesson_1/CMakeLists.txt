@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4.1)#指定 Cmake 需要的最低版本
+cmake_minimum_required(VERSION 3.10.2)#指定 Cmake 需要的最低版本
 # 创建和命名该库，第一个参数是库的名字，例如取名为 native-lib，将会生成一个命名为 libnative-lib.so 的库。
 # 第二个参数是指定库的类型，一般为 SHARED，即动态库（以 .so 为后缀），还有一种是静态库 STATIC，即静态库（以 .a 为后缀）。
 # 第三个参数是指定该库使用的源文件路径。

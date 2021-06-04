@@ -6,7 +6,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
     }
 }
 buildscript {
@@ -14,6 +13,7 @@ buildscript {
         google()
         mavenCentral()
     }
+    ext.ndk = "21.1.6352462"
     ext.kotlin_version = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
     ext.kotlin_core = "androidx.core:core-ktx:1.3.1"
     ext.appcompat = "androidx.appcompat:appcompat:1.2.0"

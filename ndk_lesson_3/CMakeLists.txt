@@ -1,4 +1,4 @@
-#cmake_minimum_required(VERSION 3.4.1)#指定 Cmake 需要的最低版本
+#cmake_minimum_required(VERSION 3.10.2)#指定 Cmake 需要的最低版本
 ##=========================================
 ## 设置项目名称 这个命令不是强制性的，但最好都加上。
 ## 它会引入两个变量 demo_BINARY_DIR 和 demo_SOURCE_DIR，同时，cmake 自动定义了两个等价的变量 PROJECT_BINARY_DIR 和 PROJECT_SOURCE_DIR。
@@ -25,7 +25,7 @@
 ## 并将其路径存储在 “log-lib” 变量中，在后面你就可以通过 “${log-lib}” 命令取出变量中的值了。
 #find_library(log_lib log)
 ##=========================================
-##设置包含的目录
+##设置包含的目录,添加目录：头文件目录等
 #include_directories(
 #        ${CMAKE_CURRENT_SOURCE_DIR}
 #        ${CMAKE_CURRENT_BINARY_DIR}
