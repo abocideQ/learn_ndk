@@ -1,4 +1,4 @@
-#cmake_minimum_required(VERSION 3.4.1)
+#cmake_minimum_required(VERSION 3.10.2)
 #指定 Cmake 需要的最低版本
 ##=========================================
 ## 设置项目名称 这个命令不是强制性的，但最好都加上。

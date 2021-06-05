@@ -19,11 +19,13 @@ void native_OnDrawFrame(JNIEnv *env, jobject obj) {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-const char *JNI_Class[] = {"lin/abcdq/ndk4/JNITest"};
+const char *JNI_Class[] = {
+        "lin/abcdq/ndk4/JNITest"
+};
 JNINativeMethod JNI_Methods[] = {
         {"native_OnSurfaceCreated", "(I)V",  (void *) native_OnSurfaceCreated},
         {"native_OnSurfaceChanged", "(II)V", (void *) native_OnSurfaceChanged},
-        {"native_OnDrawFrame",   "()V",   (void *) native_OnDrawFrame}
+        {"native_OnDrawFrame",      "()V",   (void *) native_OnDrawFrame}
 };
 #define JNI_LENGTH(n) (sizeof(n) / sizeof(n[0]))
 jint JNI_OnLoad(JavaVM *vm, void *reserved) {
