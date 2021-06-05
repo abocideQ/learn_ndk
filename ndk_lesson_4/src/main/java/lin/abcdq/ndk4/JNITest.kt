@@ -9,6 +9,12 @@ import javax.microedition.khronos.opengles.GL10
 
 /**
  * openGLes Build
+ *
+ * cmake {
+ *  cppFlags "-std=c++11 -frtti -fexceptions" (-std=c++1 : 支持C++11 , frtti：运行时类型识别(RTTI) , fexceptions: 开启异常捕获)
+ *  abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+ *  }
+ *
  */
 @RequiresApi(Build.VERSION_CODES.CUPCAKE)
 class JNITest : GLSurfaceView.Renderer {
