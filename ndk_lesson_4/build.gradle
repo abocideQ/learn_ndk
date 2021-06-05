@@ -13,18 +13,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    ndkVersion "$ndk"
     defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 30
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11 -frtti -fexceptions"
+                cppFlags ""
+                arguments '-DANDROID_STL=c++_static'
+                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
             }
         }
     }
     externalNativeBuild {
         cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
+            path "CMakeLists.txt"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

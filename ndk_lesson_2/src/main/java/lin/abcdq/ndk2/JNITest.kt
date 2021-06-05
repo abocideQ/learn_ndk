@@ -14,7 +14,7 @@ class JNITest {
     }
 
     init {
-        System.loadLibrary("native_lib")
+        System.loadLibrary("native_lib2")
     }
 
     external fun JNIString(): String?
