@@ -25,4 +25,5 @@ cmake {
     cppFlags "-std=c++11 -frtti -fexceptions" (-std=c++1 : 支持C++11 , frtti：运行时类型识别(RTTI) , fexceptions: 开启Android端NDK异常捕获)
     abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
 }
+native 代码补全问题： android studio 4.0 + -> File -> other setting -> clangd -> code completion -> clangd completion with builtin
 ```

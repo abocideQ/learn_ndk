@@ -6,18 +6,14 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
     defaultConfig {
+        minSdkVersion 19
         externalNativeBuild {
             cmake {
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang"
                 cppFlags "-std=c++11 -frtti -fexceptions"
-                abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+                cFlags "-D__STDC_FORMAT_MACROS"
+                abiFilters 'arm64-v8a'
             }
         }
     }
@@ -25,6 +21,13 @@ android {
         cmake {
             path "CMakeLists.txt"
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
