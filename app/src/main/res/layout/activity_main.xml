@@ -9,5 +9,5 @@
     <android.opengl.GLSurfaceView
         android:id="@+id/gsv_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.opengl.GLSurfaceView>
+        android:layout_height="500dp"></android.opengl.GLSurfaceView>
 </RelativeLayout>
