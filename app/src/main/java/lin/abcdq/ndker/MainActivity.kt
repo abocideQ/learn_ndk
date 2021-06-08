@@ -6,9 +6,6 @@ import android.opengl.GLSurfaceView
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-/**
- * Triangle Rectangle
- */
 class MainActivity : AppCompatActivity() {
 
     private var mTriangleBuffer = floatArrayOf(

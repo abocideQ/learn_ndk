@@ -31,6 +31,7 @@ const char *fragment = "#version 300 es                         \n"
 //};
 
 void TriangleSample::onSetData(float *bufferArray, int arraySize, int color) {
+    mDataSize = arraySize;
     mData = new float[arraySize];
     int i = 0;
     for (; i < arraySize; i = i + 1) {
@@ -40,7 +41,8 @@ void TriangleSample::onSetData(float *bufferArray, int arraySize, int color) {
     GLfloat greenF = ((color >> 8) & 0xFF) * 1.0f / 255;
     GLfloat blueF = (color & 0xFF) * 1.0f / 255;
     GLfloat alphaF = ((color >> 24) & 0xFF) * 1.0f / 255;
-    mColor = new float[arraySize / 3 * 4];
+    mColorSize = arraySize / 3 * 4;
+    mColor = new float[mColorSize];
     i = 0;
     for (; i < arraySize; i = i + 4) {
         mColor[i + 0] = redF;
@@ -69,7 +71,7 @@ void TriangleSample::onDraw() {
     glEnableVertexAttribArray(0);//location = 0 vPosition
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, mColor);
     glEnableVertexAttribArray(1);//location = 1 vColor
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, mDataSize / 3);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);

@@ -30,4 +30,8 @@ cmake {
 les5
 ```
 Triangle Rectangle
+glDrawArrays(GL_TRIANGLES, 0, 3 * 三角个数);
+GL_TRIANGLES: 每3个顶点组成一个三角
+GL_TRIANGLE_STRIP : 复用顶点 -> V0 V1 V2 -> V1 V2 V3 -> V2 V3 V4 依次组成顶点
+GL_TRIANGLE_FAN ： 与GL_TRIANGLE_STRIP 相似，顶点复用方式不同
 ```

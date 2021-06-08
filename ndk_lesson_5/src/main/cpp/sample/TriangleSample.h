@@ -9,6 +9,8 @@ public:
         m_Vertex = 0;
         m_Fragment = 0;
         m_Program = 0;
+        mDataSize = 0;
+        mColorSize = 0;
         m_SurfaceWidth = 0;
         m_SurfaceHeight = 0;
     }
@@ -30,7 +32,9 @@ protected:
     GLuint m_Fragment;
     GLuint m_Program;
     float *mData;
+    int mDataSize;
     float *mColor;
+    int mColorSize;
     int m_SurfaceWidth;
     int m_SurfaceHeight;
 
