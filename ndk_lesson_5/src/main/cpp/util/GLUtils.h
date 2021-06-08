@@ -10,14 +10,16 @@ class GLUtils {
 public:
     static GLuint glProgram(const char *vertex, const char *fragment);
 
-    static void glUse(GLuint program);
+    static void glProgramViewPort(int w, int h);
 
-    static void glClear(GLuint program);
+    static void glProgramUse(GLuint program);
+
+    static void glProgramClear(GLuint program);
 
     static void glProgramDel(GLuint program);
 
 private:
-    static GLuint glShader(int type, const char *p);
+    static GLuint glShader(GLenum type, const char *p);
 };
 
 

@@ -1,6 +1,7 @@
 package lin.abcdq.ndk5
 
 import android.opengl.GLSurfaceView
+import android.util.Log
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 

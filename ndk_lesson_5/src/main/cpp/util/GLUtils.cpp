@@ -9,47 +9,48 @@ GLuint GLUtils::glProgram(const char *vertex, const char *fragment) {
     GLuint fragmentShader = glShader(GL_FRAGMENT_SHADER, fragment);
     if (!fragmentShader) return program;
     program = glCreateProgram();
-    LOGCATE("GL glProgram %d", program);
     if (program) {
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);
         glLinkProgram(program);
         GLint linkStatus = GL_FALSE;
         glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
+
         glDetachShader(program, vertexShader);
         glDeleteShader(vertexShader);
         vertexShader = 0;
         glDetachShader(program, fragmentShader);
         glDeleteShader(fragmentShader);
         fragmentShader = 0;
-        LOGCATE("GL linkStatus1 %d", program);
-        if (linkStatus != GL_TRUE) {
-            LOGCATE("GL linkStatus2 %d", program);
-            GLint infoLength = 0;
-            glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLength);
-            if (infoLength) {
-                char *infoBuffer = (char *) malloc((size_t) infoLength);
-                if (infoBuffer) {
-                    glGetProgramInfoLog(program, infoLength, NULL, infoBuffer);
-                    free(infoBuffer);
+        if (linkStatus == GL_FALSE) {
+            GLint length = 0;
+            glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+            if (length) {
+                char *info = (char *) malloc((size_t) length);
+                if (info) {
+                    glGetProgramInfoLog(program, length, NULL, info);
+                    LOGCATE("GLUtils::glProgram Could not link program:\n%s\n", info);
+                    free(info);
                 }
                 glDeleteProgram(program);
                 program = 0;
             }
         }
     }
-    LOGCATE("GL Create %d", program);
     return program;
 }
 
-void GLUtils::glUse(GLuint program) {
-    if (program == 0) return;
-    glUse(program);
+void GLUtils::glProgramViewPort(int w, int h) {
+    glViewport(0, 0, w, h);
 }
 
-void GLUtils::glClear(GLuint program) {
+void GLUtils::glProgramUse(GLuint program) {
     if (program == 0) return;
-    LOGCATE("GL Clear %d", program);
+    glUseProgram(program);
+}
+
+void GLUtils::glProgramClear(GLuint program) {
+    if (program == 0) return;
     glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }
@@ -59,23 +60,29 @@ void GLUtils::glProgramDel(GLuint program) {
     glDeleteProgram(program);
 }
 
-GLuint GLUtils::glShader(int type, const char *p) {
+GLuint GLUtils::glShader(GLenum type, const char *p) {
     GLuint shader = 0;
     shader = glCreateShader(type);
     if (shader) {
         glShaderSource(shader, 1, &p, NULL);
         glCompileShader(shader);
-        GLint compileStatus = 0;
-        glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
-        if (!compileStatus) {
-            GLint infoLength = 0;
-            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLength);
-            if (infoLength) {
-                char *infoBuffer = (char *) malloc((size_t) infoLength);
-                if (infoBuffer) {
-                    glGetShaderInfoLog(shader, infoLength, NULL, infoBuffer);
-                    //ERROR:Could not compile shader
-                    free(infoBuffer);
+        GLint shaderStatus = GL_FALSE;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &shaderStatus);
+        if (shaderStatus == GL_FALSE) {
+            GLint length = 0;
+            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
+            if (length) {
+                char *info = (char *) malloc((size_t) length);
+                if (info) {
+                    glGetShaderInfoLog(shader, length, NULL, info);
+                    if (type == GL_VERTEX_SHADER) {
+                        LOGCATE("GLUtils::glShader Could not compile shader Vertex:\n%s\n", info);
+                    } else if (type == GL_FRAGMENT_SHADER) {
+                        LOGCATE("GLUtils::glShader Could not compile shader Fragment:\n%s\n", info);
+                    } else {
+                        LOGCATE("GLUtils::glShader Could not compile shader ????:\n%s\n", info);
+                    }
+                    free(info);
                 }
                 glDeleteShader(shader);
                 shader = 0;

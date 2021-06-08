@@ -1,10 +1,11 @@
 #include "jni.h"
 #include "sample/TriangleSample.h"
+#include "util/Log.h"
 
 extern "C" {
-void native_OnSetData(JNIEnv *env, jobject obj, jfloat *buffer, jint bufferSize, jint color) {
-//    jfloat *bb = env->GetFloatArrayElements(buffer, JNI_FALSE);
-    TriangleSample::instance()->onSetData(buffer, bufferSize, color);
+void native_OnSetData(JNIEnv *env, jobject obj, jfloatArray buffer, jint bufferSize, jint color) {
+    jfloat *bf = env->GetFloatArrayElements(buffer, JNI_FALSE);
+    TriangleSample::instance()->onSetData(bf, bufferSize, color);
 }
 
 void native_OnSurfaceCreated(JNIEnv *env, jobject obj) {
@@ -28,10 +29,10 @@ const char *JNI_Class[] = {
 };
 JNINativeMethod JNI_Methods[] = {
         {"native_OnSetData",        "([FII)V", (void *) native_OnSetData},
-        {"native_OnSurfaceCreated", "()V",    (void *) native_OnSurfaceCreated},
-        {"native_OnSurfaceChanged", "(II)V",  (void *) native_OnSurfaceChanged},
-        {"native_OnDrawFrame",      "()V",    (void *) native_OnDrawFrame},
-        {"native_OnDestroy",        "()V",    (void *) native_OnDestroy},
+        {"native_OnSurfaceCreated", "()V",     (void *) native_OnSurfaceCreated},
+        {"native_OnSurfaceChanged", "(II)V",   (void *) native_OnSurfaceChanged},
+        {"native_OnDrawFrame",      "()V",     (void *) native_OnDrawFrame},
+        {"native_OnDestroy",        "()V",     (void *) native_OnDestroy},
 };
 #define JNI_LENGTH(n) (sizeof(n) / sizeof(n[0]))
 jint JNI_OnLoad(JavaVM *vm, void *reserved) {

@@ -30,7 +30,7 @@ protected:
     GLuint m_Fragment;
     GLuint m_Program;
     float mData[9];
-    float mColor[4];
+    float mColor[12];
     int m_SurfaceWidth;
     int m_SurfaceHeight;
 
