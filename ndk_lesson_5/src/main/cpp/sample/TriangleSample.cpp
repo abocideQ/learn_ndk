@@ -32,9 +32,9 @@ const char *fragment = "#version 300 es                         \n"
 
 void TriangleSample::onSetData(float *bufferArray, int arraySize, int color) {
     mDataSize = arraySize;
-    mData = new float[arraySize];
+    mData = new float[mDataSize];
     int i = 0;
-    for (; i < arraySize; i = i + 1) {
+    for (; i < mDataSize; i = i + 1) {
         mData[i] = bufferArray[i];
     }
     GLfloat redF = ((color >> 16) & 0xFF) * 1.0f / 255;
@@ -44,13 +44,16 @@ void TriangleSample::onSetData(float *bufferArray, int arraySize, int color) {
     mColorSize = arraySize / 3 * 4;
     mColor = new float[mColorSize];
     i = 0;
-    for (; i < arraySize; i = i + 4) {
-        mColor[i + 0] = redF;
-        mColor[i + 1] = greenF;
-        mColor[i + 2] = blueF;
-        mColor[i + 3] = alphaF;
+    for (; i < mColorSize; i = i + 4) {
+        mColor[i + 0] = redF - ((float) i * 0.005f);
+        mColor[i + 1] = greenF + ((float) i * 0.005f);
+        mColor[i + 2] = blueF + ((float) i * 0.005f);
+        mColor[i + 3] = alphaF - ((float) i * 0.005f);
+//        mColor[i + 0] = redF;
+//        mColor[i + 1] = greenF;
+//        mColor[i + 2] = blueF;
+//        mColor[i + 3] = alphaF;
     }
-
 }
 
 void TriangleSample::onInit() {

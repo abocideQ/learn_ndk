@@ -9,7 +9,53 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
-    private var mRectangleBuffer = floatArrayOf(
+
+    private val m3dBoxBuffer = floatArrayOf(
+        //背面矩形
+        0.75f, 0.75f, 0.0f,
+        -0.25f, 0.75f, 0.0f,
+        -0.25f, -0.25f, 0.0f,
+        0.75f, 0.75f, 0.0f,
+        -0.25f, -0.25f, 0.0f,
+        0.75f, -0.25f, 0.0f,
+        //左侧矩形
+        -0.25f, 0.75f, 0.0f,
+        -0.75f, 0.25f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        -0.25f, 0.75f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        -0.25f, -0.25f, 0.0f,
+        //底部矩形
+        0.75f, -0.25f, 0.0f,
+        -0.25f, -0.25f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        0.75f, -0.25f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        0.25f, -0.75f, 0.0f,
+        //正面矩形
+        0.25f, 0.25f, 0.0f,
+        -0.75f, 0.25f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        0.25f, 0.25f, 0.0f,
+        -0.75f, -0.75f, 0.0f,
+        0.25f, -0.75f, 0.0f,
+        //右侧矩形
+        0.75f, 0.75f, 0.0f,
+        0.25f, 0.25f, 0.0f,
+        0.25f, -0.75f, 0.0f,
+        0.75f, 0.75f, 0.0f,
+        0.25f, -0.75f, 0.0f,
+        0.75f, -0.25f, 0.0f,
+        //顶部矩形
+        0.75f, 0.75f, 0.0f,
+        -0.25f, 0.75f, 0.0f,
+        -0.75f, 0.25f, 0.0f,
+        0.75f, 0.75f, 0.0f,
+        -0.75f, 0.25f, 0.0f,
+        0.25f, 0.25f, 0.0f
+    )
+
+    private val mRectangleBuffer = floatArrayOf(
         -0.5f, 0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
@@ -17,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         0.5f, 0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
     )
-    private var mTriangleBuffer = floatArrayOf(
+    private val mTriangleBuffer = floatArrayOf(
         0.0f, 0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
@@ -28,7 +74,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mRender.setData(mRectangleBuffer, mRectangleBuffer.size, mColor)
+        mRender.setData(m3dBoxBuffer, m3dBoxBuffer.size, mColor)
+//        mRender.setData(mRectangleBuffer, mRectangleBuffer.size, mColor)
 //        mRender.setData(mTriangleBuffer, mTriangleBuffer.size, mColor)
         val mGLSurfaceView = findViewById<GLSurfaceView>(R.id.gsv_content)
         mGLSurfaceView.setEGLContextClientVersion(3)
