@@ -6,9 +6,12 @@ import android.opengl.GLSurfaceView
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+/**
+ * Triangle Rectangle
+ */
 class MainActivity : AppCompatActivity() {
 
-    private var mBuffer = floatArrayOf(
+    private var mTriangleBuffer = floatArrayOf(
         0.0f, 0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
         0.5f, -0.5f, 0.0f,
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mRender.setData(mBuffer, mBuffer.size, mColor)
+        mRender.setData(mTriangleBuffer, mTriangleBuffer.size, mColor)
         val mGLSurfaceView = findViewById<GLSurfaceView>(R.id.gsv_content)
         mGLSurfaceView.setEGLContextClientVersion(3)
         mGLSurfaceView.setRenderer(mRender)

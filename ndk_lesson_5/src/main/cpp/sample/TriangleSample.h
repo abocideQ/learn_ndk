@@ -29,8 +29,8 @@ protected:
     GLuint m_Vertex;
     GLuint m_Fragment;
     GLuint m_Program;
-    float mData[9];
-    float mColor[12];
+    float *mData;
+    float *mColor;
     int m_SurfaceWidth;
     int m_SurfaceHeight;
 
