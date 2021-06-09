@@ -4,7 +4,8 @@ add_library(native_lib6
         SHARED
         src/main/cpp/native_lib.cpp
         src/main/cpp/util/GLUtils.cpp
-        src/main/cpp/sample/TextureSample.cpp)
+        src/main/cpp/sample/VBOSample.cpp
+        src/main/cpp/sample/VAOSample.cpp)
 
 target_link_libraries(native_lib6
         log

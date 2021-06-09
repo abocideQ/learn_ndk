@@ -35,3 +35,9 @@ GL_TRIANGLES: 每3个顶点组成一个三角
 GL_TRIANGLE_STRIP : 复用顶点 -> V0 V1 V2 -> V1 V2 V3 -> V2 V3 V4 依次组成顶点
 GL_TRIANGLE_FAN ： 与GL_TRIANGLE_STRIP 相似，顶点复用方式不同
 ```
+les6
+```
+VBO : 每个VBO对应一个float[] 相当于一个VBO对应绘制一个物体
+VAO : VBO不支持切换，每个VAO绑定一个VBO，方便与后面切换绘制不同的物体
+纹理
+```

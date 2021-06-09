@@ -6,16 +6,13 @@ import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
 /**
+ * VBO,VAO
  * 纹理
  */
 class JNITest : GLSurfaceView.Renderer {
 
     init {
         System.loadLibrary("native_lib6")
-    }
-
-    fun setData(buffer: FloatArray, bufferSize: Int, color: Int) {
-        native_OnSetData(buffer, bufferSize, color)
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {

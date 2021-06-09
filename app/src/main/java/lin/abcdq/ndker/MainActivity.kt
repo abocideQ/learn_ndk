@@ -69,12 +69,13 @@ class MainActivity : AppCompatActivity() {
         0.5f, -0.5f, 0.0f,
     )
     private var mColor = Color.RED
-    private val mRender = lin.abcdq.ndk5.JNITest()
+//    private val mRender = lin.abcdq.ndk5.JNITest()
+    private val mRender = lin.abcdq.ndk6.JNITest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mRender.setData(m3dBoxBuffer, m3dBoxBuffer.size, mColor)
+//        mRender.setData(m3dBoxBuffer, m3dBoxBuffer.size, mColor)
 //        mRender.setData(mRectangleBuffer, mRectangleBuffer.size, mColor)
 //        mRender.setData(mTriangleBuffer, mTriangleBuffer.size, mColor)
         val mGLSurfaceView = findViewById<GLSurfaceView>(R.id.gsv_content)

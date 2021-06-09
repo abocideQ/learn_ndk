@@ -35,6 +35,7 @@ dependencies {
     implementation project(":ndk_lesson_3")
     implementation project(":ndk_lesson_4")
     implementation project(":ndk_lesson_5")
+    implementation project(":ndk_lesson_6")
     implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"

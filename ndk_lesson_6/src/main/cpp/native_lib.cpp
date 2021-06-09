@@ -1,27 +1,31 @@
 #include "jni.h"
-#include "sample/TextureSample.h"
+#include "sample/VBOSample.h"
+#include "sample/VAOSample.h"
 #include "util/Log.h"
 
 extern "C" {
 void native_OnSetData(JNIEnv *env, jobject obj, jfloatArray buffer, jint bufferSize, jint color) {
-    jfloat *bf = env->GetFloatArrayElements(buffer, JNI_FALSE);
-    TriangleSample::instance()->onSetData(bf, bufferSize, color);
+
 }
 
 void native_OnSurfaceCreated(JNIEnv *env, jobject obj) {
-    TriangleSample::instance()->onInit();
+//        VBOSample::instance()->onInit();
+    VAOSample::instance()->onInit();
 }
 
 void native_OnSurfaceChanged(JNIEnv *env, jobject obj, jint width, jint height) {
-    TriangleSample::instance()->onChanged(width, height);
+//    VBOSample::instance()->onChanged(width, height);
+    VAOSample::instance()->onChanged(width, height);
 }
 
 void native_OnDrawFrame(JNIEnv *env, jobject obj) {
-    TriangleSample::instance()->onDraw();
+//    VBOSample::instance()->onDraw();
+    VAOSample::instance()->onDraw();
 }
 
 void native_OnDestroy(JNIEnv *env, jobject obj) {
-    TriangleSample::instance()->onDestroy();
+//    VBOSample::instance()->onDestroy();
+    VAOSample::instance()->onDestroy();
 }
 
 const char *JNI_Class[] = {
