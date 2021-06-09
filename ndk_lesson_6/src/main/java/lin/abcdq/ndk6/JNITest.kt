@@ -15,6 +15,10 @@ class JNITest : GLSurfaceView.Renderer {
         System.loadLibrary("native_lib6")
     }
 
+    fun onImageUpdate(buffer: ByteArray, size: Int, w: Int, h: Int) {
+        native_onImageUpdate(buffer, size, w, h)
+    }
+
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         native_OnSurfaceCreated()
     }
@@ -31,7 +35,7 @@ class JNITest : GLSurfaceView.Renderer {
         native_OnDestroy()
     }
 
-    private external fun native_OnSetData(buffer: FloatArray, bufferSize: Int, color: Int)
+    private external fun native_onImageUpdate(buffer: ByteArray, size: Int, w: Int, h: Int)
 
     private external fun native_OnSurfaceCreated()
 
