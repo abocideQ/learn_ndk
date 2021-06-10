@@ -49,3 +49,11 @@ VBO : 每个VBO对应一个float[] 相当于一个VBO对应绘制一个物体
 VAO : VBO不支持切换，每个VAO绑定一个VBO，方便与后面切换绘制不同的物体
 纹理 ：Texture
 ```
+
+```
+Ⅶ matrix
+vecN * matrixN = new VecN
+vecN * matrix1N * matrix2N = new VecN
+矩阵相乘顺序 ：缩放 -> 旋转 -> 位移 , 如果先位移再缩放，位移的向量会被缩放
+https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/
+```
