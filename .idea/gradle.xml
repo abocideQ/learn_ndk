@@ -11,12 +11,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/ndk_lesson_1" />
-            <option value="$PROJECT_DIR$/ndk_lesson_2" />
-            <option value="$PROJECT_DIR$/ndk_lesson_3" />
-            <option value="$PROJECT_DIR$/ndk_lesson_4" />
-            <option value="$PROJECT_DIR$/ndk_lesson_5" />
-            <option value="$PROJECT_DIR$/ndk_lesson_6" />
+            <option value="$PROJECT_DIR$/ndk1" />
+            <option value="$PROJECT_DIR$/ndk2" />
+            <option value="$PROJECT_DIR$/ndk3" />
+            <option value="$PROJECT_DIR$/ndk4" />
+            <option value="$PROJECT_DIR$/ndk5" />
+            <option value="$PROJECT_DIR$/ndk6" />
+            <option value="$PROJECT_DIR$/ndk7" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

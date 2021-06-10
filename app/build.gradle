@@ -30,12 +30,12 @@ android {
 }
 
 dependencies {
-    implementation project(":ndk_lesson_1")
-    implementation project(":ndk_lesson_2")
-    implementation project(":ndk_lesson_3")
-    implementation project(":ndk_lesson_4")
-    implementation project(":ndk_lesson_5")
-    implementation project(":ndk_lesson_6")
+    implementation project(":ndk1")
+    implementation project(":ndk2")
+    implementation project(":ndk3")
+    implementation project(":ndk4")
+    implementation project(":ndk5")
+    implementation project(":ndk6")
     implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"
