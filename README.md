@@ -47,6 +47,7 @@ GL_TRIANGLE_FAN ： 与GL_TRIANGLE_STRIP 相似，顶点复用方式不同
 Ⅵ 
 VBO : 每个VBO对应一个float[] 相当于一个VBO对应绘制一个物体
 VAO : VBO不支持切换，每个VAO绑定一个VBO，方便与后面切换绘制不同的物体
+EBO : 索引:指定绘制顺序，方便矩形等形状绘制(v1 v2 v3 , v4 v5 v6 - > v1 v2 v3 , v1 v3 v4)
 纹理 ：Texture
 ```
 
