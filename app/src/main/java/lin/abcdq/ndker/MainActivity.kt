@@ -8,7 +8,6 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import java.nio.ByteBuffer
 
-
 class MainActivity : AppCompatActivity() {
 
     //    private val mRender = lin.abcdq.ndk5.JNITest()
