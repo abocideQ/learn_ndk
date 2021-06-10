@@ -37,6 +37,7 @@ dependencies {
     implementation project(":ndk5")
     implementation project(":ndk6")
     implementation project(":ndk7")
+    implementation project(":ndk8")
     implementation "$kotlin_stdlib"
     implementation "$kotlin_core"
     implementation "$appcompat"

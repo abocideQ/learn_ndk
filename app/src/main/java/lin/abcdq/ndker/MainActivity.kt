@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity() {
 //    private val mRender = lin.abcdq.ndk4.JNITest()
 //    private val mRender = lin.abcdq.ndk5.JNITest()
 //    private val mRender = lin.abcdq.ndk6.JNITest()
-    private val mRender = lin.abcdq.ndk7.JNITest()
+//    private val mRender = lin.abcdq.ndk7.JNITest()
+    private val mRender = lin.abcdq.ndk8.JNITest()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +43,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bitmap() {
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.java)
-        val length: Int = bitmap.byteCount
-        val buffer: ByteBuffer = ByteBuffer.allocate(length)
-        bitmap.copyPixelsToBuffer(buffer)
-        val bytes = buffer.array()
-        mRender.onImageUpdate(bytes, bytes.size, bitmap.width, bitmap.height)
+        val bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.texture)
+        val length1: Int = bitmap1.byteCount
+        val buffer1: ByteBuffer = ByteBuffer.allocate(length1)
+        bitmap1.copyPixelsToBuffer(buffer1)
+        val bytes1 = buffer1.array()
+        val bitmap2 = BitmapFactory.decodeResource(resources, R.drawable.java)
+        val length2: Int = bitmap2.byteCount
+        val buffer2: ByteBuffer = ByteBuffer.allocate(length2)
+        bitmap2.copyPixelsToBuffer(buffer2)
+        val bytes2 = buffer2.array()
+        mRender.onImageUpdate(
+            bytes1,
+            bytes1.size,
+            bitmap1.width,
+            bitmap1.height,
+            bytes2,
+            bytes2.size,
+            bitmap2.width,
+            bitmap2.height
+        )
     }
 
     private val m3dBoxBuffer = floatArrayOf(

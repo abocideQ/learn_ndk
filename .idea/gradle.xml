@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/ndk5" />
             <option value="$PROJECT_DIR$/ndk6" />
             <option value="$PROJECT_DIR$/ndk7" />
+            <option value="$PROJECT_DIR$/ndk8" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
