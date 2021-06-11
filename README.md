@@ -99,9 +99,20 @@ Y02  Y03
 U00  U00       U00
 ---------------------------------------------------
 YUV转 RGB
+in vec2 v_texCoord; 
+layout(location = 0) out vec4 v_texCoord;
+uniform sampler2D y_texture;                        
+uniform sampler2D uv_texture; 
+void main(){
+vec3 yuv;
+yuv.x = texture(y_texture, v_texCoord).r;   
+yuv.y = texture(uv_texture, v_texCoord).a-0.5;  
+yuv.z = texture(uv_texture, v_texCoord).r-0.5;  
 (
 1.0f,    1.0f,     1.0f,                    
 0.0f,    -0.344f,  1.770f,                  
 1.403f,  -0.714f,  0.0f
-) * yuv
+) * yuv;
+outColor = vec4(rgb, 1);
+}
 ```
