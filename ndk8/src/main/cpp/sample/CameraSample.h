@@ -1,10 +1,10 @@
 #ifndef NDKER_CAMERASAMPLE_H
 #define NDKER_CAMERASAMPLE_H
 
-#include <../util/GLUtils.h>
-#include <../glm/glm.hpp>
-#include <../glm/gtc/matrix_transform.hpp>
-#include <../glm/gtc/type_ptr.hpp>
+#include "../util/GLUtils.h"
+#include "../glm/glm.hpp"
+#include "../glm/gtc/matrix_transform.hpp"
+#include "../glm/gtc/type_ptr.hpp"
 
 class CameraSample {
 public:
@@ -20,6 +20,18 @@ public:
     void onDestroy();
 
     static CameraSample *instance();
+
+    void zBuffer();
+
+    void modelMatrix3DWorld();
+
+    void viewMatrix();
+
+    void projectionMatrixOrthographic();
+
+    void projectionMatrixPerspective();
+
+    void cameraMatrix();
 
 protected:
     GLuint m_Texture1;

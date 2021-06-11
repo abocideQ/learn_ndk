@@ -46,12 +46,28 @@ float m3DBOXVertexBuffer[] = {
         -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
 };
 
+glm::vec3 cubePositions[] = {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(2.0f, 5.0f, -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f, -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f, -7.5f),
+        glm::vec3(1.3f, -2.0f, -2.5f),
+        glm::vec3(1.5f, 2.0f, -2.5f),
+        glm::vec3(1.5f, 0.2f, -1.5f),
+        glm::vec3(-1.3f, 1.0f, -1.5f)
+};
+
 const char *vertexTexture = "#version 300 es                            \n"
                             "layout(location = 0) in vec4 vPosition;    \n"
                             "layout(location = 1) in vec2 vTexCoord;    \n"
                             "out vec2 fTexCoord;                        \n"
+                            "uniform mat4 model;//模型：世界空间          \n"
+                            "uniform mat4 view; //视图：观察空间          \n"
+                            "uniform mat4 projection;//射影：裁剪空间     \n"
                             "void main(){                               \n"
-                            "gl_Position = vPosition;                   \n"
+                            "gl_Position = projection * view * model * vPosition;\n"
                             "fTexCoord = vec2(vTexCoord.x, 1.0 - vTexCoord.y);\n"
                             "}                                          \n";
 
@@ -130,7 +146,12 @@ void CameraSample::onDraw() {
     glUniform1i(tex1Map, 0);
     glUniform1i(tex2Map, 1);
     glBindVertexArray(m_VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    zBuffer();
+    modelMatrix3DWorld();
+    viewMatrix();
+    projectionMatrixPerspective();
+    cameraMatrix();
 }
 
 void CameraSample::onDestroy() {
@@ -142,5 +163,68 @@ CameraSample *CameraSample::instance() {
     if (mSample == nullptr) mSample = new CameraSample();
     return mSample;
 }
+}
+
+//深度测试
+void CameraSample::zBuffer() {
+    glEnable(GL_DEPTH_TEST);
+}
+
+float modelRotation = 0.0f;
+
+//模型矩阵：世界空间的旋转缩放移动
+void CameraSample::modelMatrix3DWorld() {
+    modelRotation = modelRotation + (rand() / double(RAND_MAX));
+    int i = 0;
+    for (; i < 10; i++) {
+        glm::mat4 model = glm::mat4(1.0);
+        model = glm::translate(model, cubePositions[i]);
+        model = glm::rotate(model, glm::radians(modelRotation), glm::vec3(1.0f, 0.3f, 0.5f));
+        model = glm::scale(model, glm::vec3(0.9, 0.9, 0.9));
+        unsigned int modelMat4 = glGetUniformLocation(m_Program, "model");
+        glUniformMatrix4fv(modelMat4, 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
+}
+
+float viewRotation = 0.0f;
+
+//视图矩阵：观察空间
+void CameraSample::viewMatrix() {
+    viewRotation = viewRotation + 0.5f;
+    glm::mat4 view = glm::mat4(1.0f);
+    //vev3 参数对应 X,Y,Z
+    view = glm::translate(view, glm::vec3(0.0f, 1.0f, -6.0f));
+    view = glm::rotate(view, glm::radians(viewRotation), glm::vec3(0.0f, 1.0f, 0.0f));
+    unsigned int viewMat4 = glGetUniformLocation(m_Program, "view");
+    glUniformMatrix4fv(viewMat4, 1, GL_FALSE, glm::value_ptr(view));
+}
+
+//正射投影矩阵：裁剪空间
+void CameraSample::projectionMatrixOrthographic() {
+    //0.0f：左边界左边 1080:右边界坐标，1080：宽1080高1080的显示区域，1.0f,10000.0f :近点到远点距离
+    glm::mat4 proj = glm::mat4(1.0);
+    proj = glm::ortho(0.0f, 1080.0f, 0.0f, 1080.0f, 1.0f, 1000.0f);
+    unsigned int projectionMat4 = glGetUniformLocation(m_Program, "projection");
+    glUniformMatrix4fv(projectionMat4, 1, GL_FALSE, glm::value_ptr(proj));
+}
+
+//透视投影矩阵：裁剪空间
+void CameraSample::projectionMatrixPerspective() {
+    //45：视野范围，1080：宽1080高1080的显示区域，1.0f,10000.0f :近点到远点距离
+    glm::mat4 proj = glm::mat4(1.0);
+    proj = glm::perspective(glm::radians(45.0f), 1080.0f / 1080.0f, 1.0f, 1000.0f);
+    unsigned int projectionMat4 = glGetUniformLocation(m_Program, "projection");
+    glUniformMatrix4fv(projectionMat4, 1, GL_FALSE, glm::value_ptr(proj));
+}
+
+//摄像机:视图矩阵实现
+void CameraSample::cameraMatrix() {
+    glm::mat4 view = glm::mat4(1.0f);
+    //参数：摄像机位置，目标位置，世界空间中的上向量的向量(一般为vec3(0.0f, 1.0f, 0.0f)不变)
+    view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+                       glm::vec3(0.0f, 1.0f, 0.0f));
+    unsigned int viewMat4 = glGetUniformLocation(m_Program, "view");
+    glUniformMatrix4fv(viewMat4, 1, GL_FALSE, glm::value_ptr(view));
 }
 

@@ -58,3 +58,12 @@ vecN * matrix1N * matrix2N = new VecN
 矩阵相乘顺序 ：缩放 -> 旋转 -> 位移 , 如果先位移再缩放，位移的向量会被缩放
 https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/
 ```
+```
+Ⅷ
+model: 模型矩阵：世界空间/坐标（世界）
+view: 视图矩阵：观察空间/坐标（摄像头）
+projection: 投影矩阵：裁剪空间
+lookAt: 摄像头
+https://learnopengl-cn.github.io/01%20Getting%20started/08%20Coordinate%20Systems/
+https://learnopengl-cn.github.io/01%20Getting%20started/09%20Camera/
+```
