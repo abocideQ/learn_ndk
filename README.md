@@ -60,6 +60,7 @@ https://learnopengl-cn.github.io/01%20Getting%20started/07%20Transformations/
 ```
 ```
 Ⅷ
+glm: 矩阵库
 model: 模型矩阵：世界空间/坐标（世界）
 view: 视图矩阵：观察空间/坐标（摄像头）
 projection: 投影矩阵：裁剪空间
