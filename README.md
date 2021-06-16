@@ -67,6 +67,13 @@ projection: 投影矩阵：裁剪空间
 lookAt: 摄像头
 https://learnopengl-cn.github.io/01%20Getting%20started/08%20Coordinate%20Systems/
 https://learnopengl-cn.github.io/01%20Getting%20started/09%20Camera/
+
+fbo: 离屏渲染
+
+egl:
+Display(EGLDisplay) 显示设备
+Surface（EGLSurface）存储图像的内存区域,Color Buffer颜色缓冲区, Stencil Buffer模板缓冲区, Depth Buffer深度缓冲区
+Context (EGLContext) OpenGL ES 绘图状态信息
 ```
 ```
 YUV（亮度 色度 浓度） 常见3种方式: 

@@ -151,7 +151,7 @@ void CameraSample::onDraw() {
     modelMatrix3DWorld();
     viewMatrix();
     projectionMatrixPerspective();
-    cameraMatrix();
+//    cameraMatrix();
 }
 
 void CameraSample::onDestroy() {

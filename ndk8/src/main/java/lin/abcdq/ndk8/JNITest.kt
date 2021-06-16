@@ -44,6 +44,8 @@ class JNITest : GLSurfaceView.Renderer {
         native_OnDestroy()
     }
 
+    private external fun native_onType(type: Int)
+
     private external fun native_onImageUpdate(
         buffer1: ByteArray,
         size1: Int,
