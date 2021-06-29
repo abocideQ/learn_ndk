@@ -77,9 +77,18 @@ Context (EGLContext) OpenGL ES 绘图状态信息
 ```
 ```
 YUV（亮度 色度 浓度） 常见3种方式: 
-NV21/NV12 (YUV420) : Y矩阵 + UV矩阵 , char *Y = data  char *UV = Y + 1080*1920 (1080*1920图片),
-YV12/YU12 (YUV420) : Y矩阵 + U矩阵 + V矩阵
-YUYV (YUV422) : YUYV矩阵
+NV21/NV12 (YUV420sp) : 
+ -> YYYY + VU / YYYY + UV;
+ -> char *y = data; char *uv = y + w * h;
+ -> ySize = w * h; uSize = w * h / 4; vSzie = uSize; 
+YV12/I420 (YUV420p) : 
+ -> YYYY + V + U / YYYY + U + V;
+ -> char *y = data; char *v = y + w * h; char *u = y + w * h + (w * h) / 4;
+ -> ySize = w * h; uSize = w * h / 4; vSzie = uSize; 
+YUV422 (YUV422) :  -> YYYY VV UU
+YUV422 (YUVY)   ： -> YUYV
+YUV422 (UYVY)   ： -> UYVY
+YUV444 (YUV444p)： -> Y V U
 ---------------------------------------------------
 NV21 旋转： 
 Y00  Y01  Y02  Y03              Y30  Y20  Y10  Y00
@@ -105,16 +114,47 @@ Y02  Y03
 
 U00  U00       U00
 ---------------------------------------------------
-YUV转 RGB
+NV21(YUV420sp) -> RGB
 in vec2 v_texCoord; 
 layout(location = 0) out vec4 v_texCoord;
 uniform sampler2D y_texture;                        
 uniform sampler2D uv_texture; 
 void main(){
 vec3 yuv;
+//We had put the Y values of each pixel to the R,G,B components by
+//GL_LUMINANCE, that's why we're pulling it from the R component,
+//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, w, h, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, yBuffer);
+//we could also use G or B
 yuv.x = texture(y_texture, v_texCoord).r;   
+//We had put the U and V values of each pixel to the A and R,G,B
+//components of the texture respectively using GL_LUMINANCE_ALPHA.
+//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, w / 2, h / 2, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, uvBuffer);
+//Since U,V bytes are interspread in the texture, this is probably
+//the fastest way to use them in the shader
 yuv.y = texture(uv_texture, v_texCoord).a-0.5;  
 yuv.z = texture(uv_texture, v_texCoord).r-0.5;  
+(
+1.0f,    1.0f,     1.0f,                    
+0.0f,    -0.344f,  1.770f,                  
+1.403f,  -0.714f,  0.0f
+) * yuv;
+outColor = vec4(rgb, 1);
+}
+---------------------------------------------------
+YUV420888 -> RGB
+in vec2 v_texCoord; 
+layout(location = 0) out vec4 v_texCoord;
+uniform sampler2D y_texture;                        
+uniform sampler2D u_texture; 
+uniform sampler2D v_texture; 
+void main(){
+vec3 yuv;
+//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, w, h, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, yBuffer);
+yuv.x = texture(y_texture, v_texCoord).r;   
+//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, w/2, h/2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, uBuffer);
+yuv.y = texture(u_texture, v_texCoord).r-0.5;  
+//glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, w/2, h/2, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, vBuffer);
+yuv.z = texture(v_texture, v_texCoord).r-0.5;  
 (
 1.0f,    1.0f,     1.0f,                    
 0.0f,    -0.344f,  1.770f,                  
