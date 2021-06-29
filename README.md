@@ -140,6 +140,25 @@ yuv.z = texture(uv_texture, v_texCoord).r-0.5;
 ) * yuv;
 outColor = vec4(rgb, 1);
 }
+
+ ->
+        vec4 NV21toRGB(vec2 texCoord) {
+                    float y = 0.0f;
+                    float u = 0.0f;
+                    float v = 0.0f;
+                    float r = 0.0f;
+                    float g = 0.0f;
+                    float b = 0.0f;
+                    y = texture(s_textureY, texCoord).r;
+                    u = texture(s_textureVU, texCoord).a;
+                    v = texture(s_textureVU, texCoord).r;
+                    u = u - 0.5;
+                    v = v - 0.5;
+                    r = y + 1.403 * v;
+                    g = y - 0.344 * u - 0.714 * v;
+                    b = y + 1.770 * u;
+                    return vec4(r, g, b, 1.0f);
+                }   
 ---------------------------------------------------
 YUV420888 -> RGB
 in vec2 v_texCoord; 
@@ -162,4 +181,22 @@ yuv.z = texture(v_texture, v_texCoord).r-0.5;
 ) * yuv;
 outColor = vec4(rgb, 1);
 }
+ ->
+ vec4 YUV420888toRGB(vec2 texCoord) {
+                    float y = 0.0f;
+                    float u = 0.0f;
+                    float v = 0.0f;
+                    float r = 0.0f;
+                    float g = 0.0f;
+                    float b = 0.0f;
+                    y = texture(s_textureY, texCoord).r;
+                    u = texture(s_textureU, texCoord).r;
+                    v = texture(s_textureV, texCoord).r;
+                    u = u - 0.5;
+                    v = v - 0.5;
+                    r = y + 1.403 * v;
+                    g = y - 0.344 * u - 0.714 * v;
+                    b = y + 1.770 * u;
+                    return vec4(r, g, b, 1.0f);
+                }
 ```
