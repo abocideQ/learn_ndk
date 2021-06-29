@@ -76,7 +76,8 @@ Surface（EGLSurface）存储图像的内存区域,Color Buffer颜色缓冲区, 
 Context (EGLContext) OpenGL ES 绘图状态信息
 ```
 ```
-YUV（亮度 色度 浓度） 常见3种方式: 
+YUV（亮度 色度 浓度） : 
+Y/U/V/R/G/B -> 取值范围0~255
 NV21/NV12 (YUV420sp) : 
  -> YYYY + VU / YYYY + UV;
  -> char *y = data; char *uv = y + w * h;
@@ -131,6 +132,7 @@ yuv.x = texture(y_texture, v_texCoord).r;
 //glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, w / 2, h / 2, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, uvBuffer);
 //Since U,V bytes are interspread in the texture, this is probably
 //the fastest way to use them in the shader
+//Y/U/V/R/G/B -> 0~255 -> in the shader need be -0.5~0.5 -> texture(yuv, texCoord).r-0.5
 yuv.y = texture(uv_texture, v_texCoord).a-0.5;  
 yuv.z = texture(uv_texture, v_texCoord).r-0.5;  
 (
@@ -199,4 +201,9 @@ outColor = vec4(rgb, 1);
                     b = y + 1.770 * u;
                     return vec4(r, g, b, 1.0f);
                 }
+---------------------------------------------------
+RGB24 -> YUV420P
+Y= 0.299*R+0.587*G+0.114*B
+U=-0.147*R-0.289*G+0.463*B
+V= 0.615*R-0.515*G-0.100*B
 ```
