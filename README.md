@@ -1,7 +1,6 @@
 opengl:https://learnopengl-cn.github.io/
-
-native 代码补全问题： android studio 4.0 + -> File -> other setting -> clangd -> code completion -> clangd completion with builtin (laji AS!)
 ![Image text](https://github.com/ABCDQ123/ndktest/blob/main/app/image/ndker.gif)
+native 代码补全问题： android studio 4.0 + -> File -> other setting -> clangd -> code completion -> clangd completion with builtin (laji AS!)
 ```
 Ⅰ 
 CMake 简单使用
